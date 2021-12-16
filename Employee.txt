@@ -1,0 +1,45 @@
+-- public.chief definition
+
+-- Drop table
+
+-- DROP TABLE public.chief;
+
+CREATE TABLE public.chief (
+	id serial4 NOT NULL,
+	responsibilities text NOT NULL,
+	CONSTRAINT chief_pkey PRIMARY KEY (id)
+);
+
+
+-- public.department definition
+
+-- Drop table
+
+-- DROP TABLE public.department;
+
+CREATE TABLE public.department (
+	id serial4 NOT NULL,
+	name varchar(40) NOT NULL,
+	chief_id int4 NOT NULL,
+	CONSTRAINT department_pkey PRIMARY KEY (id),
+	CONSTRAINT department_chief_id_fkey FOREIGN KEY (chief_id) REFERENCES public.chief(id)
+);
+
+
+-- public.employee definition
+
+-- Drop table
+
+-- DROP TABLE public.employee;
+
+CREATE TABLE public.employee (
+	id serial4 NOT NULL,
+	name varchar(40) NOT NULL,
+	salary int4 NOT NULL,
+	post varchar(40) NOT NULL,
+	department_id int4 NOT NULL,
+	chief_id int4 NOT NULL,
+	CONSTRAINT employee_pkey PRIMARY KEY (id),
+	CONSTRAINT employee_chief_id_fkey FOREIGN KEY (chief_id) REFERENCES public.chief(id),
+	CONSTRAINT employee_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.department(id)
+);
